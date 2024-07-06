@@ -1,8 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"net/http"
 
+	"github.com/gin-gonic/gin"
 	"github.com/haroonalbar/jwtgo/initializers"
 )
 
@@ -13,5 +14,16 @@ func init() {
 }
 
 func main() {
-	fmt.Println("JWT")
+	// create a router
+	r := gin.Default()
+
+	// handle ping
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"message": "pong",
+		})
+	})
+
+	// start server
+	r.Run()
 }
